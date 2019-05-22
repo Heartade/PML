@@ -142,7 +142,9 @@ if __name__ == "__main__":
   print(lx)
 
   n = PMLObject()
+  m = PMLObject()
   n.from_list(lx[0])
+  m.from_list(lx[1])
   print(n.attributes)
   print(n.tags)
 
