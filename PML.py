@@ -10,6 +10,21 @@ class PMLObject:
     return self.attributes['NAME']
   def objtype(self):
     return self.attributes['_OBJTYPE']
+  def get(self, attr_name):
+    return self.attributes[attr_name]
+  def describe(self):
+    if 'DESCRIPTION' in self.attributes:
+      print(self.attributes['DESCRIPTION'])
+    self.print_attrs()
+  def set(self, attr_name, attr_val):
+    if attr_name in self.attributes:
+      if attr_name != 'NAME' and attr_name != '_OBJTYPE':
+        self.attributes[attr_name] += attr_val
+    else:
+      self.attributes[attr_name] = attr_val
+      if attr_name == 'NAME':
+        if self.get('_OBJTYPE') in name_of_types:
+          types[attr_val] = self
   def print_attrs(self):
     print('ATTRIBUTES OF '+self.attributes['NAME']+':')
     for key in self.attributes:
@@ -74,17 +89,6 @@ class PMLObject:
         attr_name = attr_name.split()[0]
       self.set(attr_name, attr_ls)
     return self
-  def get(self, attr_name):
-    return self.attributes[attr_name]
-  def set(self, attr_name, attr_val):
-    if attr_name in self.attributes:
-      if attr_name != 'NAME' and attr_name != '_OBJTYPE':
-        self.attributes[attr_name] += attr_val
-    else:
-      self.attributes[attr_name] = attr_val
-      if attr_name == 'NAME':
-        if self.get('_OBJTYPE') in name_of_types:
-          types[attr_val] = self
       
 
 
@@ -120,7 +124,7 @@ class Parser:
   def print_indented(self,s, l):
     for x in l:
       if type(x) is str:
-        print s+x.strip()
+        print (s+x.strip())
       else:
         self.print_indented(s+'  ',x)
 

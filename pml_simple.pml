@@ -1,5 +1,12 @@
 PROGRAM pml:
   HAS:
+    VAR names:
+      TYPE dict
+        all the objects in this program.
+    VAR types:
+      DESCRIPTION:
+        all the 'type's in this program.
+      TYPE dict
     CLASS PMLObject:
       HAS:
         !VALUE VAR attributes:
@@ -7,7 +14,23 @@ PROGRAM pml:
         !VALUE VAR tags:
           TYPE list
       DOES:
+        METHOD describe:
+          DESCRIPTION:
+            describes an objects. prints given description if possible.
+        !PUBLIC METHOD get:
+          PARAM:
+            VAR attr_name
+          RETURNS:
+            VAR super.attributes[attr_name]
+        !PUBLIC METHOD set:
+          PARAM:
+            VAR attr_name
+            VAR attr_val
+          MODIFIES:
+            VAR super.attributes
         !PUBLIC METHOD __init__:
+          DESCRIPTION:
+            first checks if the object already exists in dictionary and if false, creates one; if true, updates.
           PARAM:
             !REFERENCE VAR self:
               TYPE PMLObject
