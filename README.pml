@@ -29,4 +29,4 @@ LANGUAGE PML:
 				VAR MODIFIES:
 					TYPE list<!REFERENCE VAR>
 				VAR CALLS:
-          TYPE list<METHOD>
+					TYPE list<METHOD>
